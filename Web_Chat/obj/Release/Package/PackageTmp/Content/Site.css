@@ -1,7 +1,4 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
+﻿
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -10,23 +7,32 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+#header{
+    margin-top:3%;
+    margin-bottom:1%;
+    margin-left:5%
+}
+#chatroom {
+    height: 400px;
+    overflow-y: auto;  
+    margin-left:5%;
+    margin-right:5%;
 }
 
-#chatroom{
-    height:500px;
-    overflow:scroll;
+#message {
+    margin-top: 1%;
+    max-width: 90% ;
+    margin-left:5%;
+    margin-bottom:1%;
 }
 
 #other {
-    margin-left:50%;
-    color: rebeccapurple;
+    margin-left:auto;
+    margin-right:1%;
+    color: gray;
+    margin-left:80%;
 }
 
 #my {
-    
     color: blue;
 }

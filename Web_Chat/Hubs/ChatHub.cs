@@ -38,7 +38,7 @@ namespace Web_Chat.Hubs
             }
         }
 
-        public void DisplayMessage()
+        public void DisplayMessage(string UserId)
         {
             using (MessageContext context = new MessageContext())
             {
@@ -50,9 +50,16 @@ namespace Web_Chat.Hubs
                 }
                 for (; i < tempMessages.Count; i++)
                 {
-                    //Clients.All.addMessage(GetNameById(tempMessages[i].FromUser), tempMessages[i].MessageText, tempMessages[i].FromUser);
-                    Clients.Caller.addMyMessage(GetNameById(tempMessages[i].FromUser), tempMessages[i].MessageText, tempMessages[i].FromUser);
-                    //Clients.Others.addOtherMessage(GetNameById(tempMessages[i].FromUser), tempMessages[i].MessageText, tempMessages[i].FromUser);
+                    if (tempMessages[i].FromUser==UserId)
+                    {
+                        Clients.Caller.addMyMessage(GetNameById(tempMessages[i].FromUser), tempMessages[i].MessageText, tempMessages[i].FromUser);
+                        Clients.Others.addOtherMessage(GetNameById(tempMessages[i].FromUser), tempMessages[i].MessageText, tempMessages[i].FromUser);
+                    }
+                    else
+                    {
+                        Clients.Caller.addOtherMessage(GetNameById(tempMessages[i].FromUser), tempMessages[i].MessageText, tempMessages[i].FromUser);
+                        Clients.Others.addMyMessage(GetNameById(tempMessages[i].FromUser), tempMessages[i].MessageText, tempMessages[i].FromUser);
+                    }              
                 }
             }
         }
@@ -128,7 +135,8 @@ namespace Web_Chat.Hubs
 
         public override System.Threading.Tasks.Task OnConnected()
         {
-            DisplayMessage();
+           var id = this.Context.Request.Cookies["UserId"].Value;
+            DisplayMessage(id);
             return base.OnConnected();
         }
     }
@@ -158,6 +166,25 @@ namespace Web_Chat.Hubs
 //            context.Messages.Add(message);
 //            context.SaveChanges();
 //            Clients.All.addMessage(newuser.Name, incomingMessage, UserId);
+//        }
+//    }
+//}
+
+//public void DisplayMessage(string UserId)
+//{
+//    using (MessageContext context = new MessageContext())
+//    {
+//        var tempMessages = context.Messages.ToList();
+//        int i = tempMessages.Count - 10;
+//        while (i < 0)
+//        {
+//            i++;
+//        }
+//        for (; i < tempMessages.Count; i++)
+//        {
+//            //Clients.All.addMessage(GetNameById(tempMessages[i].FromUser), tempMessages[i].MessageText, tempMessages[i].FromUser);
+//            Clients.Caller.addMyMessage(GetNameById(tempMessages[i].FromUser), tempMessages[i].MessageText, tempMessages[i].FromUser);
+//            //Clients.Others.addOtherMessage(GetNameById(tempMessages[i].FromUser), tempMessages[i].MessageText, tempMessages[i].FromUser);
 //        }
 //    }
 //}

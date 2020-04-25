@@ -9,14 +9,16 @@
         $('#chatroom').append('<p><b id="UserName" >' + htmlEncode(name)+'</b>: ' + htmlEncode(message) + '</p>');
     };
 
+    $('#message').css("width")
+
     chat.client.addMyMessage = function (name, message, userid) {
         // Добавление сообщений на веб-страницу 
-        $('#chatroom').append('<p id="my"><b id="UserName" >' + htmlEncode(name) + '</b>: ' + htmlEncode(message) + '</p>');
+        $('#chatroom').append('<p id="my"><b id="UserName" >' + htmlEncode(name) + '</b>: ' + htmlEncode(message) + '</p>');            
     };
 
     chat.client.addOtherMessage = function (name, message, userid) {
         // Добавление сообщений на веб-страницу 
-        $('#chatroom').append('<p id="other"><b id="UserName" >' + htmlEncode(name) + '</b>: ' + htmlEncode(message) + '</p>');
+        $('#chatroom').append('<p id="other" ><b id="UserName" >' + htmlEncode(name) + '</b>: ' + htmlEncode(message) + '</p>');       
     };
 
     $("#message").focus();
@@ -29,7 +31,7 @@
         $('#hdId').val(id);
         $('#username').val(userName);
         $('#UserId').val(userId)
-        $('#header').html('<h3>Добро пожаловать, ' + userName +'</h3>');
+        $('#header').html('<h3>Hello, ' + userName +'</h3>');
         chat.server.connect(userId);
         // Добавление всех пользователей
         for (i = 0; i < allUsers.length; i++) {
@@ -66,8 +68,9 @@
         if (e.which == 13) {
             chat.server.send($('#username').val(), $('#message').val(), $('#UserId').val());
             $('#message').val('');
-        }
+         }
         });
+
     });        
 });
 

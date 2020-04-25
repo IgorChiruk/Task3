@@ -6,29 +6,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>WebChat</title>
 </head>
-<body>
-    <h2>Чат</h2>
-
-    <div class="main">       
-        <div id="chatBody">
-            <div id="header"></div>
-            <div id="inputForm">
-                <input type="text" id="message" />
-                <input type="button" id="sendmessage" value="Отправить" />
+<body> 
+        <nav class="navbar-expand-md navbar-dark fixed-top bg-dark" >
+            <div class="container-fluid">
+                <div class="navbar-header">                 
+                    <a class="navbar-brand" href="#">WebChat</a>
+                </div>              
             </div>
-            <div id="chatroom" ></div>
+        </nav>
+  
+    <div class="main">
+        <div id="chatBody">
+            <h2 id="header"></h2>
+            <div class="border rounded border-info" id="chatroom">
+             
+            </div>
+            <div id="inputForm">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="message">             
+                <div class="text-center">
+                    <input type="button" id="sendmessage" value="Send" class="btn btn-primary"/>           
+                </div>
+            </div>
         </div>
         <input id="hdId" type="hidden" />
         <input id="username" type="hidden" value="@Model.Name" />
         <input id="UserId" type="hidden" value="@Model.Id" />
     </div>
-    
+
     <script src="~/Scripts/jquery-1.6.4.min.js"></script>
     <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src="~/signalr/hubs"></script>
     <script src="~/Scripts/util.js"></script>
     <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 </body>
 </html>
